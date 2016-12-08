@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="Surveying Erazx" />
+
+
+
+<meta name="description" content="redis 数据类型
+Strings
+
+数据是二进制安全的，可以存储JPEG格式图片或一个序列化的ruby对象
+字符串类型最大可以存储512M字节的内容
+123456root@b6832986afab:~# redis-cli 127.0.0.1:6379&amp;gt; set mykey somevalueOK127.0.0.1:6379&amp;gt; get mykey&amp;quot;somevalue&amp;qu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="redis基础-数据结构">
+<meta property="og:url" content="http://blog.ai-fire.com/2016/12/08/redis基础-数据结构/index.html">
+<meta property="og:site_name" content="Surveying's Blog">
+<meta property="og:description" content="redis 数据类型
+Strings
+
+数据是二进制安全的，可以存储JPEG格式图片或一个序列化的ruby对象
+字符串类型最大可以存储512M字节的内容
+123456root@b6832986afab:~# redis-cli 127.0.0.1:6379&amp;gt; set mykey somevalueOK127.0.0.1:6379&amp;gt; get mykey&amp;quot;somevalue&amp;qu">
+<meta property="og:updated_time" content="2016-12-08T08:01:20.735Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="redis基础-数据结构">
+<meta name="twitter:description" content="redis 数据类型
+Strings
+
+数据是二进制安全的，可以存储JPEG格式图片或一个序列化的ruby对象
+字符串类型最大可以存储512M字节的内容
+123456root@b6832986afab:~# redis-cli 127.0.0.1:6379&amp;gt; set mykey somevalueOK127.0.0.1:6379&amp;gt; get mykey&amp;quot;somevalue&amp;qu">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Surveying&#39;s Blog" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>redis基础-数据结构 | Surveying&#39;s Blog</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Surveying Erazx</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/openssl证书/">openssl证书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis数据结构/">redis数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自签名/">自签名</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Surveying Erazx</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Surveying Erazx</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-redis基础-数据结构" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/12/08/redis基础-数据结构/" class="article-date">
+      <time datetime="2016-12-08T07:56:00.000Z" itemprop="datePublished">2016-12-08</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      redis基础-数据结构
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/redis/">redis</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis数据结构/">redis数据结构</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="redis-数据类型"><a href="#redis-数据类型" class="headerlink" title="redis 数据类型"></a>redis 数据类型</h2><ul>
+<li><p>Strings</p>
+<ul>
+<li>数据是二进制安全的，可以存储JPEG格式图片或一个序列化的ruby对象</li>
+<li><p>字符串类型最大可以存储512M字节的内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">root@b6832986afab:~# redis-cli </div><div class="line">127.0.0.1:6379&gt; set mykey somevalue</div><div class="line">OK</div><div class="line">127.0.0.1:6379&gt; get mykey</div><div class="line">&quot;somevalue&quot;</div><div class="line">127.0.0.1:6379&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>set , get 命令创建，索引strings，</p>
+</li>
+<li><p>append 追加字符串</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"># set 默认会覆盖已有的key值</div><div class="line"># 使用附加选项nx，则set只在key不存在时才成功</div><div class="line"># 附加选项xx，则会覆盖</div><div class="line">127.0.0.1:6379&gt; set mykey ddddd</div><div class="line">OK</div><div class="line">127.0.0.1:6379&gt; get mykey</div><div class="line">&quot;ddddd&quot;</div><div class="line">127.0.0.1:6379&gt; set mykey eeeee nx</div><div class="line">(nil)</div><div class="line">127.0.0.1:6379&gt; get mykey</div><div class="line">&quot;ddddd&quot;</div><div class="line">127.0.0.1:6379&gt; set mykey eeeee xx</div><div class="line">OK</div><div class="line">127.0.0.1:6379&gt; get mykey</div><div class="line">&quot;eeeee&quot;</div><div class="line">127.0.0.1:6379&gt; set mykey myvalue</div><div class="line">OK</div><div class="line">127.0.0.1:6379&gt; get mykey</div><div class="line">&quot;myvalue&quot;</div><div class="line">127.0.0.1:6379&gt; APPEND mykey 222</div><div class="line">(integer) 10</div><div class="line">127.0.0.1:6379&gt; </div><div class="line">127.0.0.1:6379&gt; get mykey</div><div class="line">&quot;myvalue222&quot;</div><div class="line">127.0.0.1:6379&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>string类型可以执行一些有趣的操作，如加法器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">127.0.0.1:6379&gt; set counter 50</div><div class="line">OK</div><div class="line">127.0.0.1:6379&gt; incr counter</div><div class="line">(integer) 51</div><div class="line">127.0.0.1:6379&gt; incr counter</div><div class="line">(integer) 52</div><div class="line">127.0.0.1:6379&gt; incrby counter 50</div><div class="line">(integer) 102</div><div class="line">127.0.0.1:6379&gt;</div><div class="line"># incr 将value转为整数并加1</div><div class="line"># incrby 则是加法运算</div><div class="line"># 类似的还有decr，decrby</div></pre></td></tr></table></figure>
+</li>
+<li><p>mset，mget 可以一次性完成多对key-value关系，mget 会返回一个value数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">127.0.0.1:6379&gt; mset a 10 b 20 c 30 d 50</div><div class="line">OK</div><div class="line">127.0.0.1:6379&gt; mget a b c d</div><div class="line">1) &quot;10&quot;</div><div class="line">2) &quot;20&quot;</div><div class="line">3) &quot;30&quot;</div><div class="line">4) &quot;50&quot;</div><div class="line">127.0.0.1:6379&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>Lists</p>
+<ul>
+<li>redis 列表是简单的字符串列表，按照插入顺序排序</li>
+<li>LPUSH 插入新元素到列表头部（左边）</li>
+<li>RPUSH 插入新元素到列表尾部(右边)</li>
+<li>上面两个操作直接操作不存在的key时，会创建新的列表，反之，当清空列表时，对应的key从key空间删除</li>
+<li>push 操作会返回列表元素长度</li>
+<li><p>lrange 通过索引值检索列表元素</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">127.0.0.1:6379&gt; rpush mylist first</div><div class="line">(integer) 1</div><div class="line">127.0.0.1:6379&gt; rpush mylist second</div><div class="line">(integer) 2</div><div class="line">127.0.0.1:6379&gt; lpush mylist slash</div><div class="line">(integer) 3</div><div class="line">127.0.0.1:6379&gt; lrange mylist 0 -1</div><div class="line">1) &quot;slash&quot;</div><div class="line">2) &quot;first&quot;</div><div class="line">3) &quot;second&quot;</div><div class="line">127.0.0.1:6379&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>rpop 取出列表尾部（右边）元素</p>
+</li>
+<li>lpop 取出列表头部（左边）元素<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">127.0.0.1:6379&gt; lpop mylist</div><div class="line">&quot;slash&quot;</div><div class="line">127.0.0.1:6379&gt; rpop mylist</div><div class="line">&quot;second&quot;</div><div class="line">127.0.0.1:6379&gt; lrange mylist 0 -1</div><div class="line">1) &quot;first&quot;</div><div class="line">127.0.0.1:6379&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>Hashes</p>
+<ul>
+<li>redis hashed 是字符串字段与字符串值之间的映射，是对象数据类型的完美展示</li>
+<li>hmset 可以设置一个多域hash表</li>
+<li>hset 设置单个域</li>
+<li>hget 获取指定单域</li>
+<li>hmget 获取指定多域</li>
+<li><p>hgetall 返回指定key的所有信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">127.0.0.1:6379&gt; hmset group:1001 groupname ssh grouptype local groupmember 20</div><div class="line">OK</div><div class="line">127.0.0.1:6379&gt; hget group groupname</div><div class="line">(nil)</div><div class="line">127.0.0.1:6379&gt; hget group:1001 groupname</div><div class="line">&quot;ssh&quot;</div><div class="line">127.0.0.1:6379&gt; hgetall group:1001 </div><div class="line">1) &quot;groupname&quot;</div><div class="line">2) &quot;ssh&quot;</div><div class="line">3) &quot;grouptype&quot;</div><div class="line">4) &quot;local&quot;</div><div class="line">5) &quot;groupmember&quot;</div><div class="line">6) &quot;20&quot;</div><div class="line">127.0.0.1:6379&gt; hset group:1001 groupname sshd</div><div class="line">(integer) 0</div><div class="line">127.0.0.1:6379&gt; hget group:1001 groupname</div><div class="line">&quot;sshd&quot;</div><div class="line">127.0.0.1:6379&gt; hget group:1001 grouptype</div><div class="line">&quot;local&quot;</div><div class="line">127.0.0.1:6379&gt; hmget group:1001 groupname grouptype groupmember</div><div class="line">1) &quot;sshd&quot;</div><div class="line">2) &quot;local&quot;</div><div class="line">3) &quot;20&quot;</div><div class="line">127.0.0.1:6379&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>还可以单独对hash表的表项进行操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">127.0.0.1:6379&gt; hincrby group:1001 groupmember 20</div><div class="line">(integer) 40</div><div class="line">127.0.0.1:6379&gt;</div><div class="line"># 没有hincr，hdecrby，hdecr。。。</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>Sets</p>
+<ul>
+<li>redis 集合是无序字符串集合，可以以O(1)的时间复杂度完成添加、删除及测试元素是否存在</li>
+<li>不允许包含相同成员，多次添加相同的元素，最终集合中只有一个</li>
+<li>sadd 生成一个无序集合，返回元素个数</li>
+<li>smembers 查看集合</li>
+<li>sismember 元素是否集合 key 的成员，是则返回1，否返回0<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">127.0.0.1:6379&gt; sadd myset 1 2 5</div><div class="line">(integer) 3</div><div class="line">127.0.0.1:6379&gt; </div><div class="line">127.0.0.1:6379&gt; smembers myset</div><div class="line">1) &quot;1&quot;</div><div class="line">2) &quot;2&quot;</div><div class="line">3) &quot;5&quot;</div><div class="line">127.0.0.1:6379&gt; sismember myset 5</div><div class="line">(integer) 1</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>Sorted Sets</p>
+<ul>
+<li><code>zadd setname sort value</code> 添加元素到有序集合</li>
+<li>zrange 查看正序集合</li>
+<li>zrevrange 查看反序集合</li>
+<li>查看时带上 WITHSCORES 参数返回记录值<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">127.0.0.1:6379&gt; zadd hackers 1940 &quot;Alan Kay&quot;</div><div class="line">(integer) 1</div><div class="line">127.0.0.1:6379&gt; zadd hackers 1950 &quot;Sophie Wilson&quot;</div><div class="line">(integer) 1</div><div class="line">127.0.0.1:6379&gt; zadd hackers 1919 &quot;Richar Steem&quot;</div><div class="line">(integer) 1</div><div class="line">127.0.0.1:6379&gt; zrange hackers 0 -1</div><div class="line">1) &quot;Richar Steem&quot;</div><div class="line">2) &quot;Alan Kay&quot;</div><div class="line">3) &quot;Sophie Wilson&quot;</div><div class="line">127.0.0.1:6379&gt; zrevrange hackers 0 -1</div><div class="line">1) &quot;Sophie Wilson&quot;</div><div class="line">2) &quot;Alan Kay&quot;</div><div class="line">3) &quot;Richar Steem&quot;</div><div class="line">127.0.0.1:6379&gt; zrevrange hackers 0 -1 withscores</div><div class="line">1) &quot;Sophie Wilson&quot;</div><div class="line">2) &quot;1950&quot;</div><div class="line">3) &quot;Alan Kay&quot;</div><div class="line">4) &quot;1940&quot;</div><div class="line">5) &quot;Richar Steem&quot;</div><div class="line">6) &quot;1919&quot;</div><div class="line">127.0.0.1:6379&gt; zrange hackers 0 -1 withscores</div><div class="line">1) &quot;Richar Steem&quot;</div><div class="line">2) &quot;1919&quot;</div><div class="line">3) &quot;Alan Kay&quot;</div><div class="line">4) &quot;1940&quot;</div><div class="line">5) &quot;Sophie Wilson&quot;</div><div class="line">6) &quot;1950&quot;</div><div class="line">127.0.0.1:6379&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><blockquote>
+<p><a href="http://redis.io/topics/data-types-intro" target="_blank" rel="external">http://redis.io/topics/data-types-intro</a></p>
+<p><a href="http://www.cnblogs.com/guanjinke/archive/2013/01/21/2870576.html" target="_blank" rel="external">http://www.cnblogs.com/guanjinke/archive/2013/01/21/2870576.html</a></p>
+</blockquote>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/12/08/redis基础-数据结构/">redis基础-数据结构</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Surveying Erazx</a></p>
+        <p><span>发布时间:</span>2016-12-08, 07:56:00</p>
+        <p><span>最后更新:</span>2016-12-08, 08:01:20</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/12/08/redis基础-数据结构/" title="redis基础-数据结构">http://blog.ai-fire.com/2016/12/08/redis基础-数据结构/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://blog.ai-fire.com/2016/12/08/redis基础-数据结构/　　作者: Surveying Erazx" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/12/08/hello-world/">
+                    Hello World
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#redis-数据类型"><span class="toc-number">1.</span> <span class="toc-text">redis 数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文档"><span class="toc-number">2.</span> <span class="toc-text">参考文档</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"redis基础-数据结构　| Surveying's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/12/08/hello-world/" title="下一篇: Hello World">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/12/08/redis基础-数据结构/">redis基础-数据结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/08/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/08/Openssl-泛域名自签名证书/">Openssl 泛域名自签名证书</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016 Surveying Erazx
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
