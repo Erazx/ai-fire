@@ -15,31 +15,25 @@
 
 
 
-<meta name="description" content="redis 数据类型
-Strings
-
+<meta name="description" content="redis 数据类型Strings
 数据是二进制安全的，可以存储JPEG格式图片或一个序列化的ruby对象
 字符串类型最大可以存储512M字节的内容
-123456root@b6832986afab:~# redis-cli 127.0.0.1:6379&amp;gt; set mykey somevalueOK127.0.0.1:6379&amp;gt; get mykey&amp;quot;somevalue&amp;qu">
+123456root@b6832986afab:~# redis-cli 127.0.0.1:6379&amp;gt; set mykey somevalueOK127.0.0.1:6379&amp;gt; get mykey&amp;quot;somevalue&amp;quot">
 <meta property="og:type" content="article">
 <meta property="og:title" content="redis基础-数据结构">
 <meta property="og:url" content="http://blog.ai-fire.com/2016/12/08/redis基础-数据结构/index.html">
 <meta property="og:site_name" content="Surveying's Blog">
-<meta property="og:description" content="redis 数据类型
-Strings
-
+<meta property="og:description" content="redis 数据类型Strings
 数据是二进制安全的，可以存储JPEG格式图片或一个序列化的ruby对象
 字符串类型最大可以存储512M字节的内容
-123456root@b6832986afab:~# redis-cli 127.0.0.1:6379&amp;gt; set mykey somevalueOK127.0.0.1:6379&amp;gt; get mykey&amp;quot;somevalue&amp;qu">
-<meta property="og:updated_time" content="2016-12-08T08:01:20.735Z">
+123456root@b6832986afab:~# redis-cli 127.0.0.1:6379&amp;gt; set mykey somevalueOK127.0.0.1:6379&amp;gt; get mykey&amp;quot;somevalue&amp;quot">
+<meta property="og:updated_time" content="2016-12-08T16:04:33.362Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="redis基础-数据结构">
-<meta name="twitter:description" content="redis 数据类型
-Strings
-
+<meta name="twitter:description" content="redis 数据类型Strings
 数据是二进制安全的，可以存储JPEG格式图片或一个序列化的ruby对象
 字符串类型最大可以存储512M字节的内容
-123456root@b6832986afab:~# redis-cli 127.0.0.1:6379&amp;gt; set mykey somevalueOK127.0.0.1:6379&amp;gt; get mykey&amp;quot;somevalue&amp;qu">
+123456root@b6832986afab:~# redis-cli 127.0.0.1:6379&amp;gt; set mykey somevalueOK127.0.0.1:6379&amp;gt; get mykey&amp;quot;somevalue&amp;quot">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -315,9 +309,7 @@ Strings
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="redis-数据类型"><a href="#redis-数据类型" class="headerlink" title="redis 数据类型"></a>redis 数据类型</h2><ul>
-<li><p>Strings</p>
-<ul>
+        <h2 id="redis-数据类型"><a href="#redis-数据类型" class="headerlink" title="redis 数据类型"></a>redis 数据类型</h2><h3 id="Strings"><a href="#Strings" class="headerlink" title="Strings"></a>Strings</h3><ul>
 <li>数据是二进制安全的，可以存储JPEG格式图片或一个序列化的ruby对象</li>
 <li><p>字符串类型最大可以存储512M字节的内容</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">root@b6832986afab:~# redis-cli </div><div class="line">127.0.0.1:6379&gt; set mykey somevalue</div><div class="line">OK</div><div class="line">127.0.0.1:6379&gt; get mykey</div><div class="line">&quot;somevalue&quot;</div><div class="line">127.0.0.1:6379&gt;</div></pre></td></tr></table></figure>
@@ -334,9 +326,7 @@ Strings
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">127.0.0.1:6379&gt; mset a 10 b 20 c 30 d 50</div><div class="line">OK</div><div class="line">127.0.0.1:6379&gt; mget a b c d</div><div class="line">1) &quot;10&quot;</div><div class="line">2) &quot;20&quot;</div><div class="line">3) &quot;30&quot;</div><div class="line">4) &quot;50&quot;</div><div class="line">127.0.0.1:6379&gt;</div></pre></td></tr></table></figure>
 </li>
 </ul>
-</li>
-<li><p>Lists</p>
-<ul>
+<h3 id="Lists"><a href="#Lists" class="headerlink" title="Lists"></a>Lists</h3><ul>
 <li>redis 列表是简单的字符串列表，按照插入顺序排序</li>
 <li>LPUSH 插入新元素到列表头部（左边）</li>
 <li>RPUSH 插入新元素到列表尾部(右边)</li>
@@ -350,9 +340,7 @@ Strings
 <li>lpop 取出列表头部（左边）元素<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">127.0.0.1:6379&gt; lpop mylist</div><div class="line">&quot;slash&quot;</div><div class="line">127.0.0.1:6379&gt; rpop mylist</div><div class="line">&quot;second&quot;</div><div class="line">127.0.0.1:6379&gt; lrange mylist 0 -1</div><div class="line">1) &quot;first&quot;</div><div class="line">127.0.0.1:6379&gt;</div></pre></td></tr></table></figure>
 </li>
 </ul>
-</li>
-<li><p>Hashes</p>
-<ul>
+<h3 id="Hashes"><a href="#Hashes" class="headerlink" title="Hashes"></a>Hashes</h3><ul>
 <li>redis hashed 是字符串字段与字符串值之间的映射，是对象数据类型的完美展示</li>
 <li>hmset 可以设置一个多域hash表</li>
 <li>hset 设置单个域</li>
@@ -365,9 +353,7 @@ Strings
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">127.0.0.1:6379&gt; hincrby group:1001 groupmember 20</div><div class="line">(integer) 40</div><div class="line">127.0.0.1:6379&gt;</div><div class="line"># 没有hincr，hdecrby，hdecr。。。</div></pre></td></tr></table></figure>
 </li>
 </ul>
-</li>
-<li><p>Sets</p>
-<ul>
+<h3 id="Sets"><a href="#Sets" class="headerlink" title="Sets"></a>Sets</h3><ul>
 <li>redis 集合是无序字符串集合，可以以O(1)的时间复杂度完成添加、删除及测试元素是否存在</li>
 <li>不允许包含相同成员，多次添加相同的元素，最终集合中只有一个</li>
 <li>sadd 生成一个无序集合，返回元素个数</li>
@@ -375,15 +361,11 @@ Strings
 <li>sismember 元素是否集合 key 的成员，是则返回1，否返回0<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">127.0.0.1:6379&gt; sadd myset 1 2 5</div><div class="line">(integer) 3</div><div class="line">127.0.0.1:6379&gt; </div><div class="line">127.0.0.1:6379&gt; smembers myset</div><div class="line">1) &quot;1&quot;</div><div class="line">2) &quot;2&quot;</div><div class="line">3) &quot;5&quot;</div><div class="line">127.0.0.1:6379&gt; sismember myset 5</div><div class="line">(integer) 1</div></pre></td></tr></table></figure>
 </li>
 </ul>
-</li>
-<li><p>Sorted Sets</p>
-<ul>
+<h3 id="Sorted-Sets"><a href="#Sorted-Sets" class="headerlink" title="Sorted Sets"></a>Sorted Sets</h3><ul>
 <li><code>zadd setname sort value</code> 添加元素到有序集合</li>
 <li>zrange 查看正序集合</li>
 <li>zrevrange 查看反序集合</li>
 <li>查看时带上 WITHSCORES 参数返回记录值<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">127.0.0.1:6379&gt; zadd hackers 1940 &quot;Alan Kay&quot;</div><div class="line">(integer) 1</div><div class="line">127.0.0.1:6379&gt; zadd hackers 1950 &quot;Sophie Wilson&quot;</div><div class="line">(integer) 1</div><div class="line">127.0.0.1:6379&gt; zadd hackers 1919 &quot;Richar Steem&quot;</div><div class="line">(integer) 1</div><div class="line">127.0.0.1:6379&gt; zrange hackers 0 -1</div><div class="line">1) &quot;Richar Steem&quot;</div><div class="line">2) &quot;Alan Kay&quot;</div><div class="line">3) &quot;Sophie Wilson&quot;</div><div class="line">127.0.0.1:6379&gt; zrevrange hackers 0 -1</div><div class="line">1) &quot;Sophie Wilson&quot;</div><div class="line">2) &quot;Alan Kay&quot;</div><div class="line">3) &quot;Richar Steem&quot;</div><div class="line">127.0.0.1:6379&gt; zrevrange hackers 0 -1 withscores</div><div class="line">1) &quot;Sophie Wilson&quot;</div><div class="line">2) &quot;1950&quot;</div><div class="line">3) &quot;Alan Kay&quot;</div><div class="line">4) &quot;1940&quot;</div><div class="line">5) &quot;Richar Steem&quot;</div><div class="line">6) &quot;1919&quot;</div><div class="line">127.0.0.1:6379&gt; zrange hackers 0 -1 withscores</div><div class="line">1) &quot;Richar Steem&quot;</div><div class="line">2) &quot;1919&quot;</div><div class="line">3) &quot;Alan Kay&quot;</div><div class="line">4) &quot;1940&quot;</div><div class="line">5) &quot;Sophie Wilson&quot;</div><div class="line">6) &quot;1950&quot;</div><div class="line">127.0.0.1:6379&gt;</div></pre></td></tr></table></figure>
-</li>
-</ul>
 </li>
 </ul>
 <h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><blockquote>
@@ -416,7 +398,7 @@ Strings
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#redis-数据类型"><span class="toc-number">1.</span> <span class="toc-text">redis 数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文档"><span class="toc-number">2.</span> <span class="toc-text">参考文档</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#redis-数据类型"><span class="toc-number">1.</span> <span class="toc-text">redis 数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Strings"><span class="toc-number">1.1.</span> <span class="toc-text">Strings</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lists"><span class="toc-number">1.2.</span> <span class="toc-text">Lists</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hashes"><span class="toc-number">1.3.</span> <span class="toc-text">Hashes</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sets"><span class="toc-number">1.4.</span> <span class="toc-text">Sets</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sorted-Sets"><span class="toc-number">1.5.</span> <span class="toc-text">Sorted Sets</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文档"><span class="toc-number">2.</span> <span class="toc-text">参考文档</span></a></li></ol>
         
     </div>
     <style>
