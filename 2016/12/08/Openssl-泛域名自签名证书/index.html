@@ -54,7 +54,7 @@
 
 
 
-    <link rel="shortcut icon" href="/favicon.png">
+    <link rel="shortcut icon" href="/favicon.ico">
 
 
 
@@ -93,7 +93,7 @@
         isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
         scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
-        search: undefined
+        search: true
     }
 </script>
 
@@ -125,6 +125,13 @@
 
         
 
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
         
 
 
@@ -189,7 +196,7 @@
                     <nav class="header-nav">
                         <ul class="social">
                             
-                                <a class="fa Email" href="mailto:123@123.com" title="Email"></a>
+                                <a class="fa Email" href="mailto:&#120;&#115;&#102;&#57;&#48;&#56;&#57;&#104;&#111;&#116;&#64;&#49;&#54;&#51;&#46;&#99;&#111;&#109;" title="Email"></a>
                             
                                 <a class="fa GitHub" href="#" title="GitHub"></a>
                             
@@ -265,7 +272,7 @@
             <nav class="header-nav">
                         <ul class="social">
                             
-                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                                <a class="fa Email" target="_blank" href="mailto:&#120;&#115;&#102;&#57;&#48;&#56;&#57;&#104;&#111;&#116;&#64;&#49;&#54;&#51;&#46;&#99;&#111;&#109;" title="Email"></a>
                             
                                 <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
                             
@@ -370,8 +377,8 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/12/08/hello-world/">
-                    Hello World
+                <a href="/2016/12/08/redis基础-数据结构/">
+                    redis基础-数据结构
                 </a>
             </div>
         
@@ -440,7 +447,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/12/08/hello-world/" title="上一篇: Hello World">
+            <a href="/2016/12/08/redis基础-数据结构/" title="上一篇: redis基础-数据结构">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -452,7 +459,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/12/08/redis基础-数据结构/">redis基础-数据结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/08/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/08/Openssl-泛域名自签名证书/">Openssl 泛域名自签名证书</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/12/09/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/08/redis基础-数据结构/">redis基础-数据结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/08/Openssl-泛域名自签名证书/">Openssl 泛域名自签名证书</a></li></ul>
 
 
 
