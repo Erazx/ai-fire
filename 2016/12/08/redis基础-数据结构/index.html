@@ -15,25 +15,16 @@
 
 
 
-<meta name="description" content="redis 数据类型Strings
-数据是二进制安全的，可以存储JPEG格式图片或一个序列化的ruby对象
-字符串类型最大可以存储512M字节的内容
-123456root@b6832986afab:~# redis-cli 127.0.0.1:6379&amp;gt; set mykey somevalueOK127.0.0.1:6379&amp;gt; get mykey&amp;quot;somevalue&amp;quot">
+<meta name="description" content="redis 数据类型">
 <meta property="og:type" content="article">
 <meta property="og:title" content="redis基础-数据结构">
 <meta property="og:url" content="http://blog.ai-fire.com/2016/12/08/redis基础-数据结构/index.html">
 <meta property="og:site_name" content="Surveying's Blog">
-<meta property="og:description" content="redis 数据类型Strings
-数据是二进制安全的，可以存储JPEG格式图片或一个序列化的ruby对象
-字符串类型最大可以存储512M字节的内容
-123456root@b6832986afab:~# redis-cli 127.0.0.1:6379&amp;gt; set mykey somevalueOK127.0.0.1:6379&amp;gt; get mykey&amp;quot;somevalue&amp;quot">
-<meta property="og:updated_time" content="2016-12-08T16:04:33.362Z">
+<meta property="og:description" content="redis 数据类型">
+<meta property="og:updated_time" content="2016-12-09T07:09:47.004Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="redis基础-数据结构">
-<meta name="twitter:description" content="redis 数据类型Strings
-数据是二进制安全的，可以存储JPEG格式图片或一个序列化的ruby对象
-字符串类型最大可以存储512M字节的内容
-123456root@b6832986afab:~# redis-cli 127.0.0.1:6379&amp;gt; set mykey somevalueOK127.0.0.1:6379&amp;gt; get mykey&amp;quot;somevalue&amp;quot">
+<meta name="twitter:description" content="redis 数据类型">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -316,7 +307,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="redis-数据类型"><a href="#redis-数据类型" class="headerlink" title="redis 数据类型"></a>redis 数据类型</h2><h3 id="Strings"><a href="#Strings" class="headerlink" title="Strings"></a>Strings</h3><ul>
+        <h2 id="redis-数据类型"><a href="#redis-数据类型" class="headerlink" title="redis 数据类型"></a>redis 数据类型</h2><a id="more"></a>
+<h3 id="Strings"><a href="#Strings" class="headerlink" title="Strings"></a>Strings</h3><ul>
 <li>数据是二进制安全的，可以存储JPEG格式图片或一个序列化的ruby对象</li>
 <li><p>字符串类型最大可以存储512M字节的内容</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">root@b6832986afab:~# redis-cli </div><div class="line">127.0.0.1:6379&gt; set mykey somevalue</div><div class="line">OK</div><div class="line">127.0.0.1:6379&gt; get mykey</div><div class="line">&quot;somevalue&quot;</div><div class="line">127.0.0.1:6379&gt;</div></pre></td></tr></table></figure>
