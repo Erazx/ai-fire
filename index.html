@@ -189,7 +189,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/openssl证书/">openssl证书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis数据结构/">redis数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自签名/">自签名</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/message-提交日志/">message 提交日志</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openssl证书/">openssl证书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis数据结构/">redis数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自签名/">自签名</a></li></ul>
                     </div>
                 </section>
                 
@@ -270,7 +270,7 @@
   
     <div class="article-meta">
       <a href="/2016/12/27/版本库推荐提交日志格式/" class="article-date">
-      <time datetime="2016-12-27T09:03:47.000Z" itemprop="datePublished">2016-12-27</time>
+      <time datetime="2016-12-27T09:03:00.000Z" itemprop="datePublished">2016-12-27</time>
 </a>
 
 
@@ -295,27 +295,28 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <blockquote>
-<p>参考文档：</p>
-</blockquote>
-<p><a href="http://blog.jobbole.com/109197/" target="_blank" rel="external">Git最佳实践：commit msg</a> </p>
-<p><a href="https://github.com/thoughtbot/dotfiles/blob/master/gitmessage" target="_blank" rel="external">thoughtbot规范</a></p>
-<h3 id="commit-message-推荐格式"><a href="#commit-message-推荐格式" class="headerlink" title="commit message 推荐格式"></a>commit message 推荐格式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"># 首行写修改的主题，不超过50字符</div><div class="line">#</div><div class="line"># 从此行起写详细的描述，每行不超过72字符，</div><div class="line"># 自行换行，要写清一下几个问题：</div><div class="line">#</div><div class="line"># * 为什么这个修改是必须的?</div><div class="line"># * 都解决了哪些问题?</div><div class="line"># * 会对其他代码有什么影响?</div><div class="line">#</div><div class="line"># 最后一行写上相应ticket链接</div></pre></td></tr></table></figure>
-<p>下面是一个例子：<br><img src="http://7xpkk2.com1.z0.glb.clouddn.com/commit-msg.jpg" alt="comit-msg"></p>
-<ul>
-<li><strong>one thing one commit</strong>：在提交 commit 的时候尽量保证这个 commit 只做一件事情，比如实现某个功能或者修改了配置文件。这样如果出现发布排期问题，比如只能发布功能A，那么可以过滤出功能A的commit，合并到发布分支中。</li>
-<li><strong>第二行空一行</strong>：这是方便<code>git log --oneline</code>查看日志时，就只显示首行</li>
-<li><strong>末行ticket链接</strong>：通常在开发之前会将所有的功能进行拆解，然后开发过程中需要通过一些工具来跟踪，每个小功能就是一个 ticket。有些公司使用 jira，有些公司使用 wiki。以使用 jira 为例，前面把功能拆解之后分到每个人手上。这样我们进行提交的时候附上对于的 ticket 链接或者 ticket 号，之后再回溯的时候就会非常方便了。或者使用 jira 集成版本控制的插件如Fisheye(crucible)，通过抓取<code>commit msg</code>进行分析就能将相应的改动代码关联到 jira 。这么做的好处不言而喻，需求-功能-开发-代码，整个都被串起来了，不管是对于新人了解系统还是5年或者10年之后回溯都是非常有帮助的。</li>
-</ul>
-
+              <p>版本控制系统中<code>commit message</code>是很小的一件事情，往往引不起大家的关注，不妨打开公司的 gitlab 上的任一个 repo，查看 commit log，满篇的 update 和 fix，完全不知道这些 commit 是要做啥。下面是最近看到一个还不错的实践。<br>
+          
       
     </div>
     
     <div class="article-info article-info-index">
       
       
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/版本控制/">版本控制</a>
+    </div>
+
 
       
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/message-提交日志/">message 提交日志</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/2016/12/27/版本库推荐提交日志格式/#more">阅读全文 >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>

@@ -6,7 +6,8 @@
     <entry>
       <title><![CDATA[版本库推荐提交日志格式]]></title>
       <url>http://blog.ai-fire.com/2016/12/27/%E7%89%88%E6%9C%AC%E5%BA%93%E6%8E%A8%E8%8D%90%E6%8F%90%E4%BA%A4%E6%97%A5%E5%BF%97%E6%A0%BC%E5%BC%8F/</url>
-      <content type="html"><![CDATA[<blockquote>
+      <content type="html"><![CDATA[<p>版本控制系统中<code>commit message</code>是很小的一件事情，往往引不起大家的关注，不妨打开公司的 gitlab 上的任一个 repo，查看 commit log，满篇的 update 和 fix，完全不知道这些 commit 是要做啥。下面是最近看到一个还不错的实践。<br><a id="more"></a></p>
+<blockquote>
 <p>参考文档：</p>
 </blockquote>
 <p><a href="http://blog.jobbole.com/109197/" target="_blank" rel="external">Git最佳实践：commit msg</a> </p>
