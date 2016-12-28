@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.ai-fire.com/"/>
-  <updated>2016-12-27T09:55:47.451Z</updated>
+  <updated>2016-12-28T07:32:42.752Z</updated>
   <id>http://blog.ai-fire.com/</id>
   
   <author>
@@ -14,6 +14,56 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Zabbix-监控php-fpm状态</title>
+    <link href="http://blog.ai-fire.com/2016/12/28/Zabbix-%E7%9B%91%E6%8E%A7php-fpm%E7%8A%B6%E6%80%81/"/>
+    <id>http://blog.ai-fire.com/2016/12/28/Zabbix-监控php-fpm状态/</id>
+    <published>2016-12-28T06:20:00.000Z</published>
+    <updated>2016-12-28T07:32:42.752Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文简述了利用zabbix监控php-fpm运行状态的配置过程，测试客户端是Centos7系统的，php-fpm、nginx都是yum安装的<br><a id="more"></a></p>
+<h2 id="php-fpm-开启-FPM-status-状态页"><a href="#php-fpm-开启-FPM-status-状态页" class="headerlink" title="php-fpm 开启 FPM status 状态页"></a>php-fpm 开启 FPM status 状态页</h2><blockquote>
+<p>vim /etc/php-fpm.d/www.conf<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># 取消此行注释</div><div class="line">pm.status_path = /status</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="Nginx配置"><a href="#Nginx配置" class="headerlink" title="Nginx配置"></a>Nginx配置</h2><blockquote>
+<p>vim /etc/nginx/conf.d/default.host.conf          </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">    listen       80 default_server;</div><div class="line">    server_name  _;</div><div class="line"></div><div class="line">    charset      utf-8;</div><div class="line"></div><div class="line">    # php-fpm status</div><div class="line">    location ~ ^/(status|ping)$</div><div class="line">    &#123;</div><div class="line">        include fastcgi_params;</div><div class="line">        fastcgi_pass 127.0.0.1:9000;</div><div class="line">        fastcgi_param SCRIPT_FILENAME $fastcgi_script_name;</div><div class="line">        allow 127.0.0.1;</div><div class="line">        allow xxx.xxx.xxx.xxx;</div><div class="line">        deny all;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    location / &#123;</div><div class="line">        proxy_redirect off;</div><div class="line">        return 403;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="重启php-fpm、nginx服务"><a href="#重启php-fpm、nginx服务" class="headerlink" title="重启php-fpm、nginx服务"></a>重启php-fpm、nginx服务</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">systemctl restart php-fpm</div><div class="line">nginx -t</div><div class="line">nginx -s reload</div><div class="line"># systemctl restart nginx</div></pre></td></tr></table></figure>
+<h2 id="测试打开status页面"><a href="#测试打开status页面" class="headerlink" title="测试打开status页面"></a>测试打开status页面</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">shell&gt; curl -s &quot;http://127.0.0.1/status&quot;</div><div class="line">pool:                 www</div><div class="line">process manager:      dynamic</div><div class="line">start time:           28/Dec/2016:14:50:53 +0800</div><div class="line">start since:          282</div><div class="line">accepted conn:        7</div><div class="line">listen queue:         0</div><div class="line">max listen queue:     0</div><div class="line">listen queue len:     128</div><div class="line">idle processes:       5</div><div class="line">active processes:     1</div><div class="line">total processes:      6</div><div class="line">max active processes: 2</div><div class="line">max children reached: 0</div><div class="line">slow requests:        0</div></pre></td></tr></table></figure>
+<h3 id="php-fpm-状态详解"><a href="#php-fpm-状态详解" class="headerlink" title="php-fpm 状态详解"></a>php-fpm 状态详解</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">pool – fpm池子名称，大多数为www</div><div class="line">process manager – 进程管理方式,值：static, dynamic or ondemand. dynamic</div><div class="line">start time – 启动日期,如果reload了php-fpm，时间会更新</div><div class="line">start since – 运行时长</div><div class="line">accepted conn – 当前池子接受的请求数</div><div class="line">listen queue – 请求等待队列，如果这个值不为0，那么要增加FPM的进程数量</div><div class="line">max listen queue – 请求等待队列最高的数量</div><div class="line">listen queue len – socket等待队列长度</div><div class="line">idle processes – 空闲进程数量</div><div class="line">active processes – 活跃进程数量</div><div class="line">total processes – 总进程数量</div><div class="line">max active processes – 最大的活跃进程数量（FPM启动开始算）</div><div class="line">max children reached - 大道进程最大数量限制的次数，如果这个数量不为0，那说明你的最大进程数量太小了，请改大一点。</div><div class="line">slow requests – 启用了php-fpm slow-log，缓慢请求的数量</div></pre></td></tr></table></figure>
+<h3 id="php-fpm-状态页可带参数"><a href="#php-fpm-状态页可带参数" class="headerlink" title="php-fpm 状态页可带参数"></a>php-fpm 状态页可带参数</h3><ul>
+<li><code>/status?json</code> : 以json格式返回结果</li>
+<li><code>/status?xml</code> : 以xml格式返回结果</li>
+<li><code>/status?html</code> : 以html格式返回结果</li>
+<li><code>/status?full</code> : 返回完整的php-fpm状态报告</li>
+</ul>
+<h3 id="full-状态页详解"><a href="#full-状态页详解" class="headerlink" title="full 状态页详解"></a>full 状态页详解</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">pid – 进程PID，可以单独kill这个进程. You can use this PID to kill a long running process.</div><div class="line">state – 当前进程的状态 (Idle, Running, …)</div><div class="line">start time – 进程启动的日期</div><div class="line">start since – 当前进程运行时长</div><div class="line">requests – 当前进程处理了多少个请求</div><div class="line">request duration – 请求时长（微妙）</div><div class="line">request method – 请求方法 (GET, POST, …)</div><div class="line">request URI – 请求URI</div><div class="line">content length – 请求内容长度 (仅用于 POST)</div><div class="line">user – 用户 (PHP_AUTH_USER) (or ‘-’ 如果没设置)</div><div class="line">script – PHP脚本 (or ‘-’ if not set)</div><div class="line">last request cpu – 最后一个请求CPU使用率。</div><div class="line">last request memorythe - 上一个请求使用的内存</div></pre></td></tr></table></figure>
+<h2 id="zabbix-client-配置"><a href="#zabbix-client-配置" class="headerlink" title="zabbix client 配置"></a>zabbix client 配置</h2><h3 id="自定义key"><a href="#自定义key" class="headerlink" title="自定义key"></a>自定义key</h3><blockquote>
+<p>vim /usr/local/zabbix/etc/zabbix_agentd.conf<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># 新增此行，引入自定义key配置文件</div><div class="line">Include=/usr/local/zabbix/etc/zabbix_agentd.conf.d/userparams.conf</div></pre></td></tr></table></figure></p>
+<p>vim /usr/local/zabbix/etc/zabbix_agentd.conf.d/userparams.conf<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">UserParameter=php-fpm.status[*],/usr/bin/curl -s &quot;http://127.0.0.1/status?xml&quot; | grep &quot;&lt;$1&gt;&quot; | awk -F&apos;&gt;|&lt;&apos; &apos;&#123; print $$3&#125;&apos;</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="重启客户端"><a href="#重启客户端" class="headerlink" title="重启客户端"></a>重启客户端</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">shell&gt; killall zabbix_agentd</div><div class="line">shell&gt; /usr/local/zabbix/sbin/zabbix_agentd</div></pre></td></tr></table></figure>
+<h2 id="zabbix-server导入php-fpm监控模板"><a href="#zabbix-server导入php-fpm监控模板" class="headerlink" title="zabbix server导入php-fpm监控模板"></a>zabbix server导入php-fpm监控模板</h2><p><a href="https://raw.githubusercontent.com/Erazx/zabbix-templates/master/templates/zbx_templates_php-fpm.xml" target="_blank" rel="external">php-fpm模板下载</a></p>
+<ul>
+<li><p>进入后台-&gt;configuration-&gt;templates-&gt;import（右侧）-&gt;选择模板-&gt;最后点击import。至此php-fpm模板已经导入到zabbix中。</p>
+</li>
+<li><p>接下来需要把php-fpm模板link到你的主机上，进入后台-&gt;configuration-&gt;点击你的主机-&gt;templates-&gt;输入php-fpm模板名称，点击add，最后点击update即可</p>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文简述了利用zabbix监控php-fpm运行状态的配置过程，测试客户端是Centos7系统的，php-fpm、nginx都是yum安装的&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="zabbix php-fpm status" scheme="http://blog.ai-fire.com/tags/zabbix-php-fpm-status/"/>
+    
+  </entry>
   
   <entry>
     <title>版本库推荐提交日志格式</title>
