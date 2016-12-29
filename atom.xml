@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.ai-fire.com/"/>
-  <updated>2016-12-29T08:47:44.973Z</updated>
+  <updated>2016-12-29T09:32:05.320Z</updated>
   <id>http://blog.ai-fire.com/</id>
   
   <author>
@@ -14,6 +14,56 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Django-编码风格</title>
+    <link href="http://blog.ai-fire.com/2016/12/29/Django-%E7%BC%96%E7%A0%81%E9%A3%8E%E6%A0%BC/"/>
+    <id>http://blog.ai-fire.com/2016/12/29/Django-编码风格/</id>
+    <published>2016-12-29T08:51:00.000Z</published>
+    <updated>2016-12-29T09:32:05.320Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Django编码风格"><a href="#Django编码风格" class="headerlink" title="Django编码风格"></a>Django编码风格</h1><p>本篇简述：目前广泛使用的python编码风格是Guido van Rossum制定的<a href="http://legacy.python.
+org/dev/peps/pep-0008/" target="_blank" rel="external">PEP8</a>。也许很多内容都已经有了解过，这里列出来方便以后可以备查。<br><a id="more"></a></p>
+<h2 id="缩进"><a href="#缩进" class="headerlink" title="缩进"></a>缩进</h2><ul>
+<li>python中缩进用来限定代码块，一般用4个空格做缩进</li>
+</ul>
+<h2 id="空行"><a href="#空行" class="headerlink" title="空行"></a>空行</h2><ul>
+<li>空两行：用来分隔顶层函数或类定义，增强代码可读性</li>
+<li>空一行：用来分隔类内部的方法，或来用分隔一个逻辑段的代码</li>
+</ul>
+<h2 id="包的引入"><a href="#包的引入" class="headerlink" title="包的引入"></a>包的引入</h2><ul>
+<li><code>import</code> 语句应该放在文件开头</li>
+<li>不建议一行引入多个模块，每一个import都应该单独一行</li>
+<li>当<code>import</code>语句过长时，可以用<code>()</code> 将引入的方法括起来，可跨行<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">import os</div><div class="line">import sys</div><div class="line"></div><div class="line">from django.http import Http404, HttpResponse</div><div class="line"></div><div class="line">from django.http import (</div><div class="line">Http404, HttpResponse, HttpResponsePermanentRedirect</div><div class="line">)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="包引入分类"><a href="#包引入分类" class="headerlink" title="包引入分类"></a>包引入分类</h2><ul>
+<li>引入标准库：<code>import simplejson</code></li>
+<li>第三方库：（网站下载或pip安装）<code>from decimal import *</code></li>
+<li>本地应用/模块的引入：<code>from models import ModleFoo</code></li>
+</ul>
+<h2 id="命名约定"><a href="#命名约定" class="headerlink" title="命名约定"></a>命名约定</h2><ul>
+<li>变量命名：绝不用单字符如<code>x</code>做变量名，用有含义的字符串命名变量，增强可阅读性</li>
+<li>包或模块命名：以小写字母缩写命名模块，因为模块名一般就是文件名，所以应尽可能简短</li>
+<li>类命名：遵循<code>CamelCase</code>命名规则，每个单词首字母大写</li>
+<li>全局变量命名：应尽可能避免使用全局变量，通常以一个下划线开头从而避免被import</li>
+<li>函数命名及方法参数的命名：以下划线隔开的小写字母组成的字符串命名</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Django编码风格&quot;&gt;&lt;a href=&quot;#Django编码风格&quot; class=&quot;headerlink&quot; title=&quot;Django编码风格&quot;&gt;&lt;/a&gt;Django编码风格&lt;/h1&gt;&lt;p&gt;本篇简述：目前广泛使用的python编码风格是Guido van Rossum制定的&lt;a href=&quot;http://legacy.python.
+org/dev/peps/pep-0008/&quot;&gt;PEP8&lt;/a&gt;。也许很多内容都已经有了解过，这里列出来方便以后可以备查。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Django" scheme="http://blog.ai-fire.com/categories/Django/"/>
+    
+    
+      <category term="PEP8 编码风格" scheme="http://blog.ai-fire.com/tags/PEP8-%E7%BC%96%E7%A0%81%E9%A3%8E%E6%A0%BC/"/>
+    
+  </entry>
   
   <entry>
     <title>Django-创建第一个项目</title>
