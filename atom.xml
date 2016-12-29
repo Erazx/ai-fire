@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.ai-fire.com/"/>
-  <updated>2016-12-29T09:32:05.320Z</updated>
+  <updated>2016-12-29T10:15:57.446Z</updated>
   <id>http://blog.ai-fire.com/</id>
   
   <author>
@@ -14,6 +14,44 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Django-Bootstrap</title>
+    <link href="http://blog.ai-fire.com/2016/12/29/Django-Bootstrap/"/>
+    <id>http://blog.ai-fire.com/2016/12/29/Django-Bootstrap/</id>
+    <published>2016-12-29T09:53:00.000Z</published>
+    <updated>2016-12-29T10:15:57.446Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Bootstrap"><a href="#Bootstrap" class="headerlink" title="Bootstrap"></a>Bootstrap</h1><p>Django有两种方式集成Bootstrap：pip安装和手动安装<br><a id="more"></a></p>
+<h2 id="PIP-安装-bootstrap3"><a href="#PIP-安装-bootstrap3" class="headerlink" title="PIP 安装 bootstrap3"></a>PIP 安装 <a href="http://django-bootstrap3.readthedocs.io/en/latest/" target="_blank" rel="external">bootstrap3</a></h2><ul>
+<li><code>pip install django-bootstrap3</code> </li>
+<li><code>settings.py</code> 添加bootstrap3到<code>INSTALLED_APPS</code>中</li>
+<li>django 模板文件中直接<code>load bootstrap3</code> 模板<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&#123;% load bootstrap3 %&#125;</div><div class="line">&#123;%# simple HTML form #%&#125;</div><div class="line">&lt;form action=&quot;action_url&quot;&gt;</div><div class="line">    &#123;% csrf_token %&#125;</div><div class="line">    &#123;% bootstrap_form sample_form %&#125;</div><div class="line">    &#123;% buttons %&#125;</div><div class="line">        &lt;button type=&quot;submit&quot; class=&quot;btn btn-primary&quot;&gt;</div><div class="line">            &#123;% bootstrap_icon &quot;heart&quot; %&#125; SUBMIT</div><div class="line">        &lt;/button&gt;</div><div class="line">    &#123;% endbuttons %&#125;</div><div class="line">&lt;/form&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="手动安装"><a href="#手动安装" class="headerlink" title="手动安装"></a>手动安装</h2><ul>
+<li><p>官方网站下载<a href="http://getbootstrap.com/" target="_blank" rel="external">bootstrap</a>，解压缩</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">django_bookmarks (django1.10) shell&gt; wget -c &quot;https://github.com/twbs/bootstrap/releases/download/v3.3.7/bootstrap-3.3.7-dist.zip&quot;</div><div class="line">static (django1.10) shell&gt; unzip bootstrap-3.3.7-dist.zip</div><div class="line">django_bookmarks (django1.10) shell&gt; tree static/bootstrap-3.3.7-dist/</div><div class="line">static/bootstrap-3.3.7-dist/</div><div class="line">├── css</div><div class="line">│   ├── bootstrap.css</div><div class="line">│   ├── bootstrap.css.map</div><div class="line">│   ├── bootstrap.min.css</div><div class="line">│   ├── bootstrap.min.css.map</div><div class="line">│   ├── bootstrap-theme.css</div><div class="line">│   ├── bootstrap-theme.css.map</div><div class="line">│   ├── bootstrap-theme.min.css</div><div class="line">│   └── bootstrap-theme.min.css.map</div><div class="line">├── fonts</div><div class="line">│   ├── glyphicons-halflings-regular.eot</div><div class="line">│   ├── glyphicons-halflings-regular.svg</div><div class="line">│   ├── glyphicons-halflings-regular.ttf</div><div class="line">│   ├── glyphicons-halflings-regular.woff</div><div class="line">│   └── glyphicons-halflings-regular.woff2</div><div class="line">└── js</div><div class="line">    ├── bootstrap.js</div><div class="line">    ├── bootstrap.min.js</div><div class="line">    └── npm.js</div><div class="line"></div><div class="line">3 directories, 16 files</div></pre></td></tr></table></figure>
+</li>
+<li><p>将bootstrap部署到<a href="https://docs.djangoproject.com/en/1.10/howto/static-files/" target="_blank" rel="external">静态文件目录</a>中</p>
+</li>
+<li><code>settings.py</code> 配置静态文件目录<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">STATIC_URL = &apos;/static/&apos;</div><div class="line"></div><div class="line">STATICFILES_DIRS = [</div><div class="line">    os.path.join(BASE_DIR, &quot;static&quot;),</div><div class="line">]</div></pre></td></tr></table></figure>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Bootstrap&quot;&gt;&lt;a href=&quot;#Bootstrap&quot; class=&quot;headerlink&quot; title=&quot;Bootstrap&quot;&gt;&lt;/a&gt;Bootstrap&lt;/h1&gt;&lt;p&gt;Django有两种方式集成Bootstrap：pip安装和手动安装&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Django" scheme="http://blog.ai-fire.com/categories/Django/"/>
+    
+    
+      <category term="Django Bootstrap" scheme="http://blog.ai-fire.com/tags/Django-Bootstrap/"/>
+    
+  </entry>
   
   <entry>
     <title>Django-编码风格</title>

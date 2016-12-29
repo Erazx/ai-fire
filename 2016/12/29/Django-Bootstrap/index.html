@@ -15,12 +15,16 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Surveying's Blog">
-<meta property="og:url" content="http://blog.ai-fire.com/tags/openssl证书/index.html">
+<meta name="description" content="BootstrapDjango有两种方式集成Bootstrap：pip安装和手动安装">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Django-Bootstrap">
+<meta property="og:url" content="http://blog.ai-fire.com/2016/12/29/Django-Bootstrap/index.html">
 <meta property="og:site_name" content="Surveying's Blog">
+<meta property="og:description" content="BootstrapDjango有两种方式集成Bootstrap：pip安装和手动安装">
+<meta property="og:updated_time" content="2016-12-29T10:15:57.446Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Surveying's Blog">
+<meta name="twitter:title" content="Django-Bootstrap">
+<meta name="twitter:description" content="BootstrapDjango有两种方式集成Bootstrap：pip安装和手动安装">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -52,7 +56,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Tag: openssl证书 | Surveying&#39;s Blog</title>
+<title>Django-Bootstrap | Surveying&#39;s Blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -62,9 +66,9 @@
         fancybox: true,
         animate: true,
         isHome: false,
-        isPost: false,
+        isPost: true,
         isArchive: false,
-        isTag: true,
+        isTag: false,
         isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
         scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
@@ -259,60 +263,168 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-Django-Bootstrap" class="article article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2016/12/08/Openssl-泛域名自签名证书/" class="archive-article-date">
-      <time datetime="2016-12-08T07:08:00.000Z" itemprop="datePublished">12-08</time>
+    <div class="article-meta">
+      <a href="/2016/12/29/Django-Bootstrap/" class="article-date">
+      <time datetime="2016-12-29T09:53:00.000Z" itemprop="datePublished">2016-12-29</time>
 </a>
 
 
-        </div>
-         
+    </div>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/12/08/Openssl-泛域名自签名证书/">Openssl 泛域名自签名证书</a>
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Django-Bootstrap
     </h1>
   
 
-        <div class="article-info info-on-archive">
-          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+    <a class="article-category-link" href="/categories/Django/">Django</a>
     </div>
 
 
-          
+        
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openssl证书/">openssl证书</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/自签名/">自签名</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Django-Bootstrap/">Django Bootstrap</a></li></ul>
     </div>
 
-        </div>
         <div class="clearfix"></div>
-    </header>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="Bootstrap"><a href="#Bootstrap" class="headerlink" title="Bootstrap"></a>Bootstrap</h1><p>Django有两种方式集成Bootstrap：pip安装和手动安装<br><a id="more"></a></p>
+<h2 id="PIP-安装-bootstrap3"><a href="#PIP-安装-bootstrap3" class="headerlink" title="PIP 安装 bootstrap3"></a>PIP 安装 <a href="http://django-bootstrap3.readthedocs.io/en/latest/" target="_blank" rel="external">bootstrap3</a></h2><ul>
+<li><code>pip install django-bootstrap3</code> </li>
+<li><code>settings.py</code> 添加bootstrap3到<code>INSTALLED_APPS</code>中</li>
+<li>django 模板文件中直接<code>load bootstrap3</code> 模板<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&#123;% load bootstrap3 %&#125;</div><div class="line">&#123;%# simple HTML form #%&#125;</div><div class="line">&lt;form action=&quot;action_url&quot;&gt;</div><div class="line">    &#123;% csrf_token %&#125;</div><div class="line">    &#123;% bootstrap_form sample_form %&#125;</div><div class="line">    &#123;% buttons %&#125;</div><div class="line">        &lt;button type=&quot;submit&quot; class=&quot;btn btn-primary&quot;&gt;</div><div class="line">            &#123;% bootstrap_icon &quot;heart&quot; %&#125; SUBMIT</div><div class="line">        &lt;/button&gt;</div><div class="line">    &#123;% endbuttons %&#125;</div><div class="line">&lt;/form&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="手动安装"><a href="#手动安装" class="headerlink" title="手动安装"></a>手动安装</h2><ul>
+<li><p>官方网站下载<a href="http://getbootstrap.com/" target="_blank" rel="external">bootstrap</a>，解压缩</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">django_bookmarks (django1.10) shell&gt; wget -c &quot;https://github.com/twbs/bootstrap/releases/download/v3.3.7/bootstrap-3.3.7-dist.zip&quot;</div><div class="line">static (django1.10) shell&gt; unzip bootstrap-3.3.7-dist.zip</div><div class="line">django_bookmarks (django1.10) shell&gt; tree static/bootstrap-3.3.7-dist/</div><div class="line">static/bootstrap-3.3.7-dist/</div><div class="line">├── css</div><div class="line">│   ├── bootstrap.css</div><div class="line">│   ├── bootstrap.css.map</div><div class="line">│   ├── bootstrap.min.css</div><div class="line">│   ├── bootstrap.min.css.map</div><div class="line">│   ├── bootstrap-theme.css</div><div class="line">│   ├── bootstrap-theme.css.map</div><div class="line">│   ├── bootstrap-theme.min.css</div><div class="line">│   └── bootstrap-theme.min.css.map</div><div class="line">├── fonts</div><div class="line">│   ├── glyphicons-halflings-regular.eot</div><div class="line">│   ├── glyphicons-halflings-regular.svg</div><div class="line">│   ├── glyphicons-halflings-regular.ttf</div><div class="line">│   ├── glyphicons-halflings-regular.woff</div><div class="line">│   └── glyphicons-halflings-regular.woff2</div><div class="line">└── js</div><div class="line">    ├── bootstrap.js</div><div class="line">    ├── bootstrap.min.js</div><div class="line">    └── npm.js</div><div class="line"></div><div class="line">3 directories, 16 files</div></pre></td></tr></table></figure>
+</li>
+<li><p>将bootstrap部署到<a href="https://docs.djangoproject.com/en/1.10/howto/static-files/" target="_blank" rel="external">静态文件目录</a>中</p>
+</li>
+<li><code>settings.py</code> 配置静态文件目录<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">STATIC_URL = &apos;/static/&apos;</div><div class="line"></div><div class="line">STATICFILES_DIRS = [</div><div class="line">    os.path.join(BASE_DIR, &quot;static&quot;),</div><div class="line">]</div></pre></td></tr></table></figure>
+</li>
+</ul>
+
+      
+    </div>
+    
   </div>
+  
+    
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/12/29/Django-编码风格/">
+                    Django-编码风格
+                </a>
+            </div>
+        
+    </nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Bootstrap"><span class="toc-number">1.</span> <span class="toc-text">Bootstrap</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#PIP-安装-bootstrap3"><span class="toc-number">1.1.</span> <span class="toc-text">PIP 安装 bootstrap3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#手动安装"><span class="toc-number">1.2.</span> <span class="toc-text">手动安装</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Django-Bootstrap　| Surveying's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
 
     
 
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/12/29/Django-编码风格/" title="下一篇: Django-编码风格">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/12/29/Django-Bootstrap/">Django-Bootstrap</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/29/Django-编码风格/">Django-编码风格</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/29/Django-创建第一个项目/">Django-创建第一个项目</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/28/Zabbix-监控php-fpm状态/">Zabbix-监控php-fpm状态</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/27/版本库推荐提交日志格式/">版本库推荐提交日志格式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/20/SVN分库/">SVN分库</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/09/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/08/redis基础-数据结构/">redis基础-数据结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/08/Openssl-泛域名自签名证书/">Openssl 泛域名自签名证书</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
 </div>
       <footer id="footer">
     <div class="outer">
