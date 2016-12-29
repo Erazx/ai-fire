@@ -15,16 +15,12 @@
 
 
 
-<meta name="description" content="前情：之前的svn版本库是单库，所有项目都只是分目录存放，准备分库。如下：">
-<meta property="og:type" content="article">
-<meta property="og:title" content="SVN分库">
-<meta property="og:url" content="http://blog.ai-fire.com/2016/12/20/SVN分库/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Surveying's Blog">
+<meta property="og:url" content="http://blog.ai-fire.com/categories/Django/index.html">
 <meta property="og:site_name" content="Surveying's Blog">
-<meta property="og:description" content="前情：之前的svn版本库是单库，所有项目都只是分目录存放，准备分库。如下：">
-<meta property="og:updated_time" content="2016-12-20T07:17:23.430Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SVN分库">
-<meta name="twitter:description" content="前情：之前的svn版本库是单库，所有项目都只是分目录存放，准备分库。如下：">
+<meta name="twitter:title" content="Surveying's Blog">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -56,7 +52,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>SVN分库 | Surveying&#39;s Blog</title>
+<title>Category: Django | Surveying&#39;s Blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -66,10 +62,10 @@
         fancybox: true,
         animate: true,
         isHome: false,
-        isPost: true,
+        isPost: false,
         isArchive: false,
         isTag: false,
-        isCategory: false,
+        isCategory: true,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
         scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
         search: true
@@ -263,161 +259,56 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-SVN分库" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap">
   
-    <div class="article-meta">
-      <a href="/2016/12/20/SVN分库/" class="article-date">
-      <time datetime="2016-12-20T07:16:53.000Z" itemprop="datePublished">2016-12-20</time>
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2016" class="archive-year">2016</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+          <div class="article-meta">
+              <a href="/2016/12/29/Django-创建第一个项目/" class="archive-article-date">
+      <time datetime="2016-12-29T07:26:00.000Z" itemprop="datePublished">12-29</time>
 </a>
 
 
-    </div>
+        </div>
+         
   
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      SVN分库
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2016/12/29/Django-创建第一个项目/">Django-创建第一个项目</a>
     </h1>
   
 
-      </header>
-      
-      <div class="article-info article-info-post">
-        
-
-        
-        <div class="clearfix"></div>
-      </div>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
+        <div class="article-info info-on-archive">
           
-        <p>前情：之前的svn版本库是单库，所有项目都只是分目录存放，准备分库。如下：<a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">/home/svn/</div><div class="line">|-- Project_1</div><div class="line">|-- Project_2</div><div class="line">`-- Project_3</div><div class="line">    |-- branches</div><div class="line">    |-- tags</div><div class="line">    `-- trunk</div></pre></td></tr></table></figure></p>
-<h2 id="导出整个版本库"><a href="#导出整个版本库" class="headerlink" title="导出整个版本库"></a>导出整个版本库</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">shell&gt; sudo svnadmin dump /home/svn &gt; /home/backup/full_svn.dump</div><div class="line">......</div><div class="line">* Dumped revision 2405.</div><div class="line">* Dumped revision 2406.</div></pre></td></tr></table></figure>
-<h2 id="使用-svndumpfilter-include-过滤出特定的项目库"><a href="#使用-svndumpfilter-include-过滤出特定的项目库" class="headerlink" title="使用 svndumpfilter include 过滤出特定的项目库"></a>使用 <code>svndumpfilter include</code> 过滤出特定的项目库</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">shell&gt; svndumpfilter help include</div><div class="line">include: 从转储串流中删除未包含指定前缀的节点。</div><div class="line">用法: svndumpfilter include PATH_PREFIX...</div><div class="line"></div><div class="line">有效选项: </div><div class="line">  --drop-empty-revs        : 删除因过滤而产生的空版本。</div><div class="line">  --renumber-revs          : 过滤后重编余下的版本。</div><div class="line">  --skip-missing-merge-sources : 跳过缺少的合并源</div><div class="line">  --targets ARG            : 从文件 ARG 中读取额外的前缀，每个一行。</div><div class="line">  --preserve-revprops      : 不过滤版本属性。</div><div class="line">  --quiet                  : 不显示过滤的统计数据。</div><div class="line">  --pattern                : 将路径前缀视为文件统配模式。</div><div class="line">  </div><div class="line">shell&gt; svndumpfilter include Project_1 --drop-empty-revs --renumber-revs &lt; full_svn.dump &gt; project_1.dump</div></pre></td></tr></table></figure>
-<h2 id="移动项目目录到顶层目录"><a href="#移动项目目录到顶层目录" class="headerlink" title="移动项目目录到顶层目录"></a>移动项目目录到顶层目录</h2><blockquote>
-<p>此时得到的 <code>project_1.dump</code> 已经可以用来创建新的版本库了，但是这样创建的版本库依然保持着 Project_1/trunk 这样的目录结构，要把项目目录移动到顶层目录，如果使用<code>svn mv</code>命令移动目录，那么原来路径的修改日志就全没了；可以通过修改dump文件中的<code>Node-path</code> 和 <code>Node-copyfrom-path</code>:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">shell&gt; sed -i &apos;s/Node-path: project_n\/trunk/Node-path: trunk/g&apos; project_1.dump</div><div class="line">shell&gt; sed -i &apos;s/Node-copyfrom-path: project_n\/trunk/Node-copyfrom-path: trunk/g&apos; project_1.dump</div></pre></td></tr></table></figure></p>
-</blockquote>
-<h2 id="创建新库"><a href="#创建新库" class="headerlink" title="创建新库"></a>创建新库</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">shell&gt; svnadmin create project_1</div></pre></td></tr></table></figure>
-<h2 id="导入版本库"><a href="#导入版本库" class="headerlink" title="导入版本库"></a>导入版本库</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">shell&gt; svnadmin load project_1 &lt; project_1.dump</div></pre></td></tr></table></figure>
-<h2 id="重定向检出路径"><a href="#重定向检出路径" class="headerlink" title="重定向检出路径"></a>重定向检出路径</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">svn switch --relocate http://svn.example.com/projects http://svn.example.com/project_n</div></pre></td></tr></table></figure>
-<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># 过滤时遇到 svndumpfilter: E200003: 复制源路径“/home/public/css/common/animate.css”无效</div></pre></td></tr></table></figure>
-      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Django/">Django</a>
     </div>
-    
-  </div>
-  
-    
 
 
-    <nav id="article-nav">
-        
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/12/27/版本库推荐提交日志格式/">
-                    版本库推荐提交日志格式
-                </a>
-            </div>
-        
-        
-            <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/12/09/hello-world/">
-                    Hello World
-                </a>
-            </div>
-        
-    </nav>
-
-  
-</article>
-
-    <div id="toc" class="toc-article">
-        <strong class="toc-title">文章目录</strong>
-        
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#导出整个版本库"><span class="toc-number">1.</span> <span class="toc-text">导出整个版本库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用-svndumpfilter-include-过滤出特定的项目库"><span class="toc-number">2.</span> <span class="toc-text">使用 svndumpfilter include 过滤出特定的项目库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#移动项目目录到顶层目录"><span class="toc-number">3.</span> <span class="toc-text">移动项目目录到顶层目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建新库"><span class="toc-number">4.</span> <span class="toc-text">创建新库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#导入版本库"><span class="toc-number">5.</span> <span class="toc-text">导入版本库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重定向检出路径"><span class="toc-number">6.</span> <span class="toc-text">重定向检出路径</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#遇到的问题"><span class="toc-number">7.</span> <span class="toc-text">遇到的问题</span></a></li></ol>
-        
-    </div>
-    <style>
-        .left-col .switch-btn,
-        .left-col .switch-area {
-            display: none;
-        }
-        .toc-level-3 i,
-        .toc-level-3 ol {
-            display: none !important;
-        }
-    </style>
-
-    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
-
-    <script>
-        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
-    </script>
-
-
-
-    
-<div class="share">
-    
-        <div class="bdsharebuttonbox">
-            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
-            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
-            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
-            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
-            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
-            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
-            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+          
         </div>
-        <script>
-            window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"SVN分库　| Surveying's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
-        </script>
-    
-
-    
-</div>
-
-
-
-
-
-
+        <div class="clearfix"></div>
+    </header>
+  </div>
+</article>
+  
+  
+    </div></section>
+  
 
     
 
-
-
-
-    <div class="scroll" id="post-nav-button">
-        
-            <a href="/2016/12/27/版本库推荐提交日志格式/" title="上一篇: 版本库推荐提交日志格式">
-                <i class="fa fa-angle-left"></i>
-            </a>
-        
-
-        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
-
-        
-            <a href="/2016/12/09/hello-world/" title="下一篇: Hello World">
-                <i class="fa fa-angle-right"></i>
-            </a>
-        
-    </div>
-
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/12/29/Django-创建第一个项目/">Django-创建第一个项目</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/28/Zabbix-监控php-fpm状态/">Zabbix-监控php-fpm状态</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/27/版本库推荐提交日志格式/">版本库推荐提交日志格式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/20/SVN分库/">SVN分库</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/09/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/08/redis基础-数据结构/">redis基础-数据结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/08/Openssl-泛域名自签名证书/">Openssl 泛域名自签名证书</a></li></ul>
-
-
-
-
-    <script>
-        
-    </script>
 </div>
       <footer id="footer">
     <div class="outer">
